@@ -1,0 +1,63 @@
+{
+  "name": "suop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SUOP — Discord-like Electron desktop app",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install",
+    "start:backend": "cd backend && npm run dev",
+    "start:electron": "npx electron .",
+    "dev": "concurrently \"npm run start:backend\" \"npm run start:electron\"",
+    "start": "npm run dev",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "electron": "^26.2.0",
+    "electron-builder": "^24.5.0"
+  },
+  "build": {
+    "appId": "com.suop.desktop",
+    "productName": "SUOP",
+    "files": [
+      "frontend/**/*",
+      "main.js",
+      "preload.js",
+      "backend/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "backend/",
+        "to": "backend/",
+        "filter": ["**/*"]
+      }
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["ia32", "x64"]
+        }
+      ],
+      "publisherName": "YOUR_COMPANY_OR_NAME"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "https://your-cdn-or-hosting/path/"
+      }
+    ]
+  }
+}

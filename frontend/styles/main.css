@@ -1,0 +1,109 @@
+:root{
+  --bg:#0f1720;
+  --panel:#0b1116;
+  --muted:#97a0ad;
+  --accent:#6f9cff;
+  --accent-2:#8af3ff;
+  --msg-bg:#11161b;
+  --glass: rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body,#app{height:100%}
+body{
+  background:linear-gradient(180deg,#07090b 0%, #0b0f13 60%);
+  color:#e6eef6;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* layout */
+#app{
+  display:grid;
+  grid-template-columns:64px 220px 240px 1fr;
+  height:100vh;
+  gap:12px;
+  padding:12px;
+  align-items:stretch;
+}
+
+/* server sidebar */
+#sidebar-servers{
+  background:var(--panel);
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  padding:8px;
+  gap:8px;
+  align-items:center;
+  box-shadow: 0 6px 24px rgba(2,6,23,0.6);
+}
+#sidebar-servers .server{
+  width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  display:flex;align-items:center;justify-content:center;color:#061226;font-weight:700;
+  transition:transform .14s ease, box-shadow .14s;
+  cursor:pointer;
+}
+#sidebar-servers .server:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,0.6)}
+
+/* channels */
+#sidebar-channels{
+  background:var(--panel);
+  border-radius:12px;
+  padding:12px;
+  display:flex;flex-direction:column;
+}
+.server-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.channel-list{display:flex;flex-direction:column;gap:6px}
+.channel{
+  padding:8px;border-radius:8px;color:var(--muted);cursor:pointer;
+  transition:background .12s,color .12s,transform .12s;
+}
+.channel:hover{background:var(--glass);color:#fff;transform:translateX(4px)}
+.channel.active{background:linear-gradient(90deg, rgba(111,156,255,0.12), rgba(138,243,255,0.04));color:#fff}
+
+/* chat */
+#chat-area{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius:12px;padding:12px;display:flex;flex-direction:column;height:calc(100vh - 48px)
+}
+#chat-header{display:flex;justify-content:space-between;align-items:center;padding:8px 6px;border-bottom:1px solid rgba(255,255,255,0.02)}
+#messages{
+  flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px;
+}
+.msg{
+  display:flex;gap:10px;align-items:flex-start;opacity:0;animation:fadeIn .18s ease forwards;
+}
+.msg .avatar{width:40px;height:40px;border-radius:8px;background:linear-gradient(90deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700}
+.msg .meta{font-size:12px;color:var(--muted)}
+.msg .bubble{background:var(--msg-bg);padding:10px;border-radius:10px;max-width:65%;box-shadow: 0 6px 14px rgba(0,0,0,0.4)}
+.message-input-row{display:flex;gap:8px;padding:8px 6px;border-top:1px solid rgba(255,255,255,0.02)}
+#message-input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+#send-btn{background:var(--accent);color:#061226;padding:8px 12px;border-radius:10px;border:none;cursor:pointer;transition:transform .12s}
+#send-btn:active{transform:scale(.98)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(2,6,12,0.6);display:flex;align-items:center;justify-content:center}
+.modal-inner{background:#081018;padding:24px;border-radius:12px;width:380px;box-shadow:0 20px 60px rgba(2,6,23,0.6)}
+.modal-inner input{width:100%;padding:10px;margin:8px 0;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit}
+.modal-inner .row{display:flex;gap:8px;justify-content:space-between}
+
+/* DM sidebar & profile */
+#sidebar-dm {
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--muted);
+}
+.dm-header { font-weight: 600; color: #fff; padding: 6px 8px }
+.dm-list { display:flex;flex-direction:column;gap:6px;overflow:auto;padding:4px }
+.dm-item{display:flex;gap:8px;align-items:center;padding:8px;border-radius:8px;cursor:pointer}
+.dm-item:hover{background:var(--glass)}
+.dm-item .dp{width:36px;height:36px;border-radius:8px;background:linear-gradient(90deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700}
+.me-summary{margin-top:auto;padding:8px;color:var(--muted);font-size:13px}
+
+/* small animations */
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}

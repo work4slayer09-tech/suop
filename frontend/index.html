@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SUOP — Desktop</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar-servers"></aside>
+
+    <!-- New: DM & presence sidebar -->
+    <aside id="sidebar-dm">
+      <header class="dm-header">
+        <h4>Direct Messages</h4>
+      </header>
+      <div id="dm-list" class="dm-list"></div>
+      <footer id="me-summary" class="me-summary"></footer>
+    </aside>
+
+    <section id="sidebar-channels"></section>
+
+    <main id="chat-area">
+      <header id="chat-header">
+        <h2 id="channel-title">Welcome</h2>
+        <div id="presence"></div>
+      </header>
+      <section id="messages"></section>
+      <form id="message-form" class="message-input-row">
+        <input id="message-input" type="text" placeholder="Message #general" autocomplete="off" />
+        <button id="send-btn" type="submit">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <!-- Profile Modal -->
+  <div id="profile-modal" class="modal" style="display:none">
+    <div class="modal-inner">
+      <h3 id="profile-name">Profile</h3>
+      <div id="profile-body"></div>
+      <div class="row">
+        <button id="profile-close" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth modal remains the same -->
+  <div id="auth-modal" class="modal">
+    <div class="modal-inner">
+      <h3 id="auth-title">Login</h3>
+      <form id="auth-form">
+        <input id="au-identifier" placeholder="Email or username" />
+        <input id="au-password" type="password" placeholder="Password" />
+        <div class="row">
+          <button id="auth-submit" type="submit">Login</button>
+          <button id="auth-toggle" type="button">Switch to Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.1/socket.io.min.js"></script>
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/socket.js"></script>
+  <script src="scripts/ui.js"></script>
+</body>
+</html>
