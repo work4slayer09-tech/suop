@@ -1,21 +1,9 @@
-# Backend Dockerfile - Node 18 LTS
-FROM node:18-alpine
-
-# Create app directory
+FROM node:18-alpine AS build
 WORKDIR /usr/src/app
-
-# Install dependencies first (leverage docker cache)
-COPY package.json package-lock.json ./
-RUN npm ci --production
-
-# Copy rest of the backend
+COPY package*.json ./
+RUN npm ci --omit=dev
 COPY . .
-
-# Ensure environment variables are provided at runtime:
-#   - MONGO_URI
-#   - JWT_SECRET
-#   - PORT (optional)
-ENV PORT=3000
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 EXPOSE 3000
-
 CMD ["node", "server.js"]
